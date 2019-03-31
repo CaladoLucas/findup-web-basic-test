@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ToDos;
+use Auth;
 
 class ToDoController extends Controller
 {
@@ -13,58 +14,29 @@ class ToDoController extends Controller
 
     public function index()
     {
-        $todos = ToDos::with('users')->get();
-        return response()->json($todos);
-    }
-
-    public function show($id){
-        $todo = ToDos::with('users')->find($id);
-
-        if(!$todo){
-            return response()->json([
-                'message' => 'Todo not found',
-            ], 404);
-        }
-
-        return response()->json($todo);
+        $todos = ToDos::where('user_id',Auth::id())->orderBy('id','DESC')->get();
+        return view('home',['todos' => $todos]);
     }
 
     public function store(Request $request)
     {
+        // dd($request);
         $todo = new ToDos();
-        $todo->fill($request->all());
+        $todo->description = $request->description;
+        $todo->user_id = Auth::id();
         $todo->save();
 
-        return response()->json($todo, 201);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $todo = ToDos::find($id);
-
-        if(!$todo) {
-            return response()->json([
-                'message'   => 'Todo not found',
-            ], 404);
-        }
-
-        $todo->fill($request->all());
-        $todo->save();
-
-        return response()->json($todo);
+        return  redirect()->route('home');
     }
 
     public function destroy($id)
     {
+        
         $todo = ToDos::find($id);
 
-        if(!$todo) {
-            return response()->json([
-                'message'   => 'Todo not found',
-            ], 404);
-        }
-
         $todo->delete();
+
+        return  redirect()->route('home');
         
     }
 }

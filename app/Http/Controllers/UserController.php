@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\User;
+use Controllers\ApiTokenController;
 
 class UserController extends Controller
 {
@@ -73,4 +74,17 @@ class UserController extends Controller
         $user->delete();
         
     }
+    public function createSession(Request $request)
+    {
+        $user = User::where('email',$request->email)->first();
+        if(!$user) {
+            return response()->json([
+                'message'   => 'User not found',
+            ], 404);
+        }
+
+        $token = new ApiTokenController;        
+        return redirect()->route('objetivocentral.index');
+    }
+
 }

@@ -16,10 +16,8 @@ class CreateTodosTable extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('description','255');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users');                  
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');          
             $table->timestamps();
             $table->softDeletes();
         });

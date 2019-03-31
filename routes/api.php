@@ -17,7 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::group(['api' => ['auth']], function () {
-    // Protected routes
-});
+Route::resource('todos', 'ToDoControllerApi');
+Route::resource('users','UserController');    
