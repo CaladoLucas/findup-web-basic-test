@@ -1,4 +1,4 @@
-#INSTRUÇÕES PARA INSTALAÇÃO DO PROJETO - LUCAS CALADO DE ARAÚJO#
+# INSTRUÇÕES PARA INSTALAÇÃO DO PROJETO - LUCAS CALADO DE ARAÚJO#
 
 1) Composer Update
 2) Configurar o .env com os dados do banco de dados
@@ -7,16 +7,25 @@
 5) Usuário Padrão:  
     * Email: admin@findup.com.br
     * Senha: 654321
-#ENDPOINTS DO PROJETO - LUCAS CALADO DE ARAÚJO#
+# ENDPOINTS DO PROJETO - LUCAS CALADO DE ARAÚJO#
 | GET|HEAD  | api/todos      |
+
 | POST      | api/todos      |
+
 | GET|HEAD  | api/todos/{id} |
+
 | PUT|PATCH | api/todos/{id} |
+
 | DELETE    | api/todos/{id} |
+
 | POST      | api/users      |
+
 | GET|HEAD  | api/users      |
+
 | GET|HEAD  | api/users/{id} |
+
 | PUT|PATCH | api/users/{id} |
+
 | DELETE    | api/users/{id} |
 
 
